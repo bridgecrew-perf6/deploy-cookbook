@@ -1,0 +1,39 @@
+{
+  "name": "cookbook-backend",
+  "version": "0.1.0",
+  "description": "Node.js on Docker",
+  "author": "First Last <first.last@example.com>",
+  "main": "server.js",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "npx jest --detectOpenHandles --env=node",
+    "eslint": "npx eslint .",
+    "prettier": "npx prettier ."
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "express-formidable": "^1.2.0",
+    "image-to-base64": "^2.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "multer": "^1.4.4",
+    "mysql": "^2.18.1",
+    "sharp": "^0.29.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.3.1",
+    "jest-cli": "^27.3.1",
+    "prettier": "^2.5.1"
+  }
+}

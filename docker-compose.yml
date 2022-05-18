@@ -1,0 +1,74 @@
+version: "3"
+services:
+
+  frontend:
+    build: ./frontend
+    image: frontend
+    ports:
+      - 3000:3000
+    environment:
+      # IP address of the server.
+      # It must match exactly the IP of the server, indeed.
+      REACT_APP_BACKEND_HOST: '192.99.108.204' # Overriden in the docker-compose.override.yml file
+      REACT_APP_BACKEND_PORT: '3001'
+    restart: always
+
+  backend:
+    build: ./backend
+    image: backend
+    ports:
+      - 3001:3001
+    environment:
+      CONFIG_MYSQL_DATABASE: cookbookdb
+      CONFIG_MYSQL_USER: root
+      CONFIG_MYSQL_PASSWORD: secret
+      CONFIG_MYSQL_HOST: db
+      # from the backend, connect to MySQL via the "db" hostname on port 3306
+      CONFIG_MYSQL_PORT: 3306
+    depends_on:
+      - db
+    restart: always
+    
+  db:
+    container_name: db
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_HOST_IP: db
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: cookbookdb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: secret
+    restart: always
+
+
+  adminer:
+    image: adminer
+    ports:
+      - "8082:8080"
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - db
+    ports:
+      - "3027:80"
+    environment:
+      PMA_USER: root
+      PMA_PASSWORD: secret
+      PMA_HOST: db
+      PMA_PORT: 3306
+    restart: always
+    
+  flyway:
+    image: flyway/flyway:7
+    # We concatenate the command below to the ENTRYPOINT of the flyway Docker container:
+    # The ENTRYPOINT is simply `flyway`
+    command: ["-url=jdbc:mysql://db:3306/cookbookdb?verifyServerCertificate=false&useSSL=false", "-user=root", "-password=secret", "-connectRetries=100", "migrate"]
+    volumes:
+      - ./flyway/sql:/flyway/sql
+    depends_on:
+      - db
+    restart: "no"
+

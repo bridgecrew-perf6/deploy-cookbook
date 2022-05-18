@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: Quicksand;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font: Lobster;
+    font-weight: bold;
+}
+
+a{
+    display: block;
+}
+
+.login__container {
+    padding-bottom: 30px;
+}
+
+input {
+    border-radius: 10px;
+    line-height: 30px;
+    padding-left: 10px;
+}
+
+.grid-parent {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+}
+
+.SearchButton {
+    border-radius: 10px;
+    line-height: 30px;
+    background-color: aliceblue;
+}
+
+.header-search {
+    color: black;
+}
+
+.recipeDetail_recipe-user {
+    display: inline-block;
+    float: right;
+}
+
+.recipeDetail_recipe-user img {
+    display: inline-block;
+    margin-left: 20px;
+}
